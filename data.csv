@@ -1,4 +1,4 @@
-id,name,age,city
-1,John Doe,30,New York
-2,Jane Smith,25,Los Angeles
-3,Bob Johnson,35,Chicago
+id,by,score,time,title,type,url
+12345,johndoe,100,1609459200,My Awesome Article,story,http://example.com
+67890,janedoe,200,1609545600,Another Great Story,story,http://example.org
+11223,bobsmith,50,1609632000,Python is Cool,story,http://python.org

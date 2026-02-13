@@ -1,38 +1,31 @@
-import pandas as pd
-from sqlalchemy import create_engine
-import os
-from dotenv import load_dotenv
-from sqlalchemy import text
 import sys
+from database import get_db_engine
+from extract import fetch_hn_top_stories
+from transform import transform_data
+from load import load_data
 
-load_dotenv()
-
-import urllib.parse
-
-# Connection string using environment variables
-password = urllib.parse.quote_plus(os.getenv('DB_PASSWORD'))
-db_url = (
-    f"mysql+pymysql://{os.getenv('DB_USER')}:{password}"
-    f"@{os.getenv('DB_HOST')}:{os.getenv('DB_PORT')}/{os.getenv('DB_NAME')}"
-)
-engine = create_engine(db_url)
-
-def ingest_data(file_path):
+def main():
     try:
-        # Read the CSV file into a DataFrame
-        df = pd.read_csv(file_path)
-        print(f"Data read successfully from {file_path}")
+        # 1. Setup Database Connection
+        engine = get_db_engine()
+        
+        # 2. Extract from HN API
+        print("Starting ETL pipeline...")
+        raw_data = fetch_hn_top_stories(limit=50)
+        
+        if not raw_data:
+            print("No data fetched. Exiting.")
+            return
 
-        # Ingest data into MySQL
-        df.to_sql('hn_reader', con=engine, if_exists='append', index=False)
-        print("Data ingested successfully into MySQL")
+        # 3. Transform
+        df_cleaned = transform_data(raw_data)
+        
+        # 4. Load
+        load_data(df_cleaned, engine)
+        
     except Exception as e:
-        print(f"Error during data ingestion: {e}")
+        print(f"Pipeline failed: {e}")
         sys.exit(1)
 
 if __name__ == "__main__":
-    file_path = 'data.csv'
-    if os.path.exists(file_path):
-        ingest_data(file_path)
-    else:
-        print(f"File {file_path} not found.")
+    main()
