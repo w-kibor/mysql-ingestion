@@ -20,11 +20,11 @@ export const metadata: Metadata = {
     { rel: "apple-touch-icon", url: "/icons/icon-192x192.png" },
     { rel: "icon", url: "/icons/icon-192x192.png" },
   ],
-  themeColor: "#ff6600",
+  themeColor: "#ec4899",
 };
 
 export const viewport = {
-  themeColor: "#ff6600",
+  themeColor: "#ec4899",
 };
 
 export default function RootLayout({

@@ -1,7 +1,7 @@
 from PIL import Image, ImageDraw
 
 def create_icon(size, filename):
-    img = Image.new('RGB', (size, size), color='#ff6600')
+    img = Image.new('RGB', (size, size), color='#ec4899')
     d = ImageDraw.Draw(img)
     # Draw a simple text or shape
     d.text((size//2-20, size//2-10), "HN", fill=(255, 255, 255))

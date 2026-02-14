@@ -39,7 +39,7 @@ export default function NewsList() {
     if (loading) {
         return (
             <div className="flex justify-center items-center py-20">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-pink-500"></div>
             </div>
         );
     }
@@ -60,13 +60,13 @@ export default function NewsList() {
                     href={article.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-50 hover:shadow-md transition-all duration-200"
+                    className="block p-6 bg-white border border-pink-100 rounded-lg shadow-sm hover:bg-pink-50 hover:shadow-md transition-all duration-200"
                 >
                     <div className="flex justify-between items-start gap-4">
-                        <h2 className="text-xl font-semibold text-gray-900 leading-tight">
+                        <h2 className="text-xl font-semibold text-gray-900 leading-tight group-hover:text-pink-600">
                             {article.title}
                         </h2>
-                        <span className="shrink-0 bg-orange-100 text-orange-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                        <span className="shrink-0 bg-pink-100 text-pink-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
                             {article.score} pts
                         </span>
                     </div>
